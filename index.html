@@ -55,66 +55,72 @@
     <div id="contenido"></div>
 
     <script>
-        // OBJETO CORREGIDO: Se cerraron bien las llaves de cada nivel
-        const datos = {
-            4: {
-                "Poción oculus": {
-                    ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
-                    tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
-                    pasos: ["1. Encender el fuego", "2. Añadir la base ", "3. Poner la mezcla a 100°", "4. Añadir ajenjo en trozos", "5. Añadir mandrágora cocida", "6. Remover 3 veces en sentido anti-horario", "7. Añadir el polvo de unicornio", "8. Remover en sentido horario", "9. Añadir la lárgrima de moonclaf", "10. Remover 2 veces en sentido anti", "11. Apagar el fuego"]
-                },
-                "Poción calmante": {
-                    ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
-                    tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
-                    pasos: ["1. Encender el fuego", "2. Añadir la base", "3. Poner la mezcla a 120°", "4. Añadir el polvo de púas", "5. Remover en sentido horario", "6. Añadir lavanda y camomila en trozos", "7. Añadir la solución", "8. Remover derecha", "9. Apagar fuego"]
-                },
-            },
-            5: {},
-            6: {},
-            7: {}
-        };
-
-        function mostrarCurso(curso) {
-            let html = "<h2>Pociones del Curso " + curso + "</h2>";
-            
-            // Verificamos si el curso tiene pociones
-            let pociones = Object.keys(datos[curso]);
-            
-            if (pociones.length === 0) {
-                html += "<p>No hay pociones registradas para este curso todavía.</p>";
-            } else {
-                pociones.forEach(pocion => {
-                    html += `<button onclick="mostrarReceta(${curso}, '${pocion}')">${pocion}</button><br>`;
-                });
-            }
-
-            html += `<br><button onclick="volverCursos()">⬅ Volver</button>`;
-            document.getElementById("contenido").innerHTML = html;
+     // Objeto de datos corregido con todas sus llaves en su sitio
+const datos = {
+    4: {
+        "Poción oculus": {
+            ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
+            tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
+            pasos: ["1. Encender el fuego", "2. Añadir la base ", "3. Poner la mezcla a 100°", "4. Añadir ajenjo en trozos", "5. Añadir mandrágora cocida", "6. Remover 3 veces en sentido anti-horario", "7. Añadir el polvo de unicornio", "8. Remover en sentido horario", "9. Añadir la lágrima de moonclaf", "10. Remover 2 veces en sentido anti", "11. Apagar el fuego"]
+        },
+        "Poción calmante": {
+            ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
+            tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
+            pasos: ["1. Encender el fuego", "2. Añadir la base", "3. Poner la mezcla a 120°", "4. Añadir el polvo de púas", "5. Remover en sentido horario", "6. Añadir lavanda y camomila en trozos", "7. Añadir la solución", "8. Remover derecha", "9. Apagar fuego"]
         }
+    },
+    5: {},
+    6: {},
+    7: {}
+};
 
-        function mostrarReceta(curso, pocion) {
-            let receta = datos[curso][pocion];
-            let html = `<h2>${pocion}</h2>`;
+function mostrarCurso(curso) {
+    let html = "<h2>Pociones del Curso " + curso + "</h2>";
+    
+    // Obtenemos las pociones del curso seleccionado
+    let listaPociones = datos[curso];
 
-            html += "<h3>Ingredientes</h3><ul class='ingredientes'>";
-            receta.ingredientes.forEach(i => { html += "<li>" + i + "</li>"; });
-            html += "</ul>";
-
-            html += "<h3>Tratamiento de ingredientes</h3><ul class='ingredientes'>";
-            receta.tratamiento.forEach(t => { html += "<li>" + t + "</li>"; });
-            html += "</ul>";
-
-            html += "<h3>Pasos</h3><ol class='pasos'>";
-            receta.pasos.forEach(p => { html += "<li>" + p + "</li>"; });
-            html += "</ol>";
-
-            html += `<button onclick="mostrarCurso(${curso})">⬅ Volver al curso</button>`;
-            document.getElementById("contenido").innerHTML = html;
+    if (Object.keys(listaPociones).length === 0) {
+        html += "<p>No hay recetas en este curso todavía.</p>";
+    } else {
+        for (let nombrePocion in listaPociones) {
+            html += `<button onclick="mostrarReceta(${curso}, '${nombrePocion}')">${nombrePocion}</button><br>`;
         }
+    }
 
-        function volverCursos() {
-            document.getElementById("contenido").innerHTML = "";
-        }
+    html += `<br><button onclick="volverCursos()">⬅ Volver</button>`;
+    document.getElementById("contenido").innerHTML = html;
+}
+
+function mostrarReceta(curso, nombrePocion) {
+    let receta = datos[curso][nombrePocion];
+    let html = `<h2>${nombrePocion}</h2>`;
+
+    html += "<h3>Ingredientes</h3><ul class='ingredientes'>";
+    receta.ingredientes.forEach(i => {
+        html += "<li>" + i + "</li>";
+    });
+    html += "</ul>"; // <-- Aquí estaba el error (línea 108 aprox)
+
+    html += "<h3>Tratamiento</h3><ul class='ingredientes'>";
+    receta.tratamiento.forEach(t => {
+        html += "<li>" + t + "</li>";
+    });
+    html += "</ul>";
+
+    html += "<h3>Pasos</h3><ol class='pasos'>";
+    receta.pasos.forEach(p => {
+        html += "<li>" + p + "</li>";
+    });
+    html += "</ol>";
+
+    html += `<button onclick="mostrarCurso(${curso})">⬅ Volver al curso</button>`;
+    document.getElementById("contenido").innerHTML = html;
+}
+
+function volverCursos() {
+    document.getElementById("contenido").innerHTML = "";
+}
     </script>
 
 </body>
