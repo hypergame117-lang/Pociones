@@ -1,169 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Libro de Pociones</title>
-
-<style>
-
-body{
-    font-family: Arial;
-    text-align: center;
-    background-color: #eef3ff;
-}
-
-button{
-    padding: 10px 20px;
-    margin: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#contenido{
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #aaa;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    background: white;
-}
-/* ingredientes sin puntos */
-.ingredientes{
-    list-style: none;
-    padding-left: 0;
-}
-
-/* números pegados */
-.pasos{
-    padding-left: 0;
-}
-    
-
-</style>
+    <meta charset="UTF-8">
+    <title>Libro de Pociones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eef3ff;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        #contenido {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #aaa;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            background: white;
+            min-height: 100px;
+        }
+        .ingredientes, .pasos {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .ingredientes {
+            list-style: none;
+            padding-left: 0;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>🧪 Libro de Pociones</h1>
+    <h1>🧪 Libro de Pociones</h1>
 
-<div id="cursos">
-<h2>Selecciona el curso</h2>
-<button onclick="mostrarCurso(4)">Curso 4</button>
-<button onclick="mostrarCurso(5)">Curso 5</button>
-<button onclick="mostrarCurso(6)">Curso 6</button>
-<button onclick="mostrarCurso(7)">Curso 7</button>
-</div>
+    <div id="cursos">
+        <h2>Selecciona el curso</h2>
+        <button onclick="mostrarCurso(4)">Curso 4</button>
+        <button onclick="mostrarCurso(5)">Curso 5</button>
+        <button onclick="mostrarCurso(6)">Curso 6</button>
+        <button onclick="mostrarCurso(7)">Curso 7</button>
+    </div>
 
-<div id="contenido"></div>
+    <div id="contenido"></div>
 
-<script>
-const datos = {
-4: {
-"Poción oculus": {
-ingredientes: [
-"Ajenjo",
-"Mandrágora",
-"Cuerno de Unicornio",
-"Lágrima de moonclaf"
-],
+    <script>
+        // OBJETO CORREGIDO: Se cerraron bien las llaves de cada nivel
+        const datos = {
+            4: {
+                "Poción oculus": {
+                    ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
+                    tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
+                    pasos: ["1. Encender el fuego", "2. Añadir la base ", "3. Poner la mezcla a 100°", "4. Añadir ajenjo en trozos", "5. Añadir mandrágora cocida", "6. Remover 3 veces en sentido anti-horario", "7. Añadir el polvo de unicornio", "8. Remover en sentido horario", "9. Añadir la lárgrima de moonclaf", "10. Remover 2 veces en sentido anti", "11. Apagar el fuego"]
+                },
+                "Poción calmante": {
+                    ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
+                    tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
+                    pasos: ["1. Encender el fuego", "2. Añadir la base", "3. Poner la mezcla a 120°", "4. Añadir el polvo de púas", "5. Remover en sentido horario", "6. Añadir lavanda y camomila en trozos", "7. Añadir la solución", "8. Remover derecha", "9. Apagar fuego"]
+                }
+            },
+            5: {},
+            6: {},
+            7: {}
+        };
 
-tratamiento: [
-"Cortar el ajenjo",
-"Cocinar la mandrágora",
-"Moler el cuerno de unicornio"
-],
+        function mostrarCurso(curso) {
+            let html = "<h2>Pociones del Curso " + curso + "</h2>";
+            
+            // Verificamos si el curso tiene pociones
+            let pociones = Object.keys(datos[curso]);
+            
+            if (pociones.length === 0) {
+                html += "<p>No hay pociones registradas para este curso todavía.</p>";
+            } else {
+                pociones.forEach(pocion => {
+                    html += `<button onclick="mostrarReceta(${curso}, '${pocion}')">${pocion}</button><br>`;
+                });
+            }
 
-pasos: [
-"1. Encender el fuego",
-"2. Añadir la base ",
-"3. Poner la mezcla a 100°",
-"4. Añadir ajenjo en trozos",
-"5. Añadir mandrágora cocida",
-"6. Remover 3 veces en sentido anti-horario",
-"7. Añadir el polvo de unicornio",
-"8. Remover en sentido horario",
-"9. Añadir la lágrima de moonclaf",
-"10. Remover 2 veces en sentido anti",
-"11. Apagar el fuego"
-]
-  
-},
-"Poción calmante": {
-ingredientes: ["Púas de knarl","Lavanda","Camomila","Solución para el dolor de cabeza"],
-tratamiento: ["Moler las púas","Cortar la lavanda","Cortar camomila"],
-pasos: [
-"1. Encender el fuego",
-"2. Añadir la base",
-"3. Poner la mezcla a 120°",
-"4. Añadir el polvo de púas",
-"5. Remover en sentido horario",
-"6. Añadir lavanda y camomila en trozos",
-"7. Añadir la solución",
-"8. Remover derecha",
-"9. Apagar fuego"
-]
-}
-}
-5: {},
-6: {},
-7: {}
+            html += `<br><button onclick="volverCursos()">⬅ Volver</button>`;
+            document.getElementById("contenido").innerHTML = html;
+        }
 
-    };
+        function mostrarReceta(curso, pocion) {
+            let receta = datos[curso][pocion];
+            let html = `<h2>${pocion}</h2>`;
 
-function mostrarCurso(curso){
+            html += "<h3>Ingredientes</h3><ul class='ingredientes'>";
+            receta.ingredientes.forEach(i => { html += "<li>" + i + "</li>"; });
+            html += "</ul>";
 
-let html = "<h2>Pociones del Curso " + curso + "</h2>";
+            html += "<h3>Tratamiento de ingredientes</h3><ul class='ingredientes'>";
+            receta.tratamiento.forEach(t => { html += "<li>" + t + "</li>"; });
+            html += "</ul>";
 
-for(let pocion in datos[curso]){
-html += `<button onclick="mostrarReceta(${curso}, '${pocion}')">${pocion}</button><br>`;
-}
+            html += "<h3>Pasos</h3><ol class='pasos'>";
+            receta.pasos.forEach(p => { html += "<li>" + p + "</li>"; });
+            html += "</ol>";
 
-html += `<br><button onclick="volverCursos()">⬅ Volver</button>`;
+            html += `<button onclick="mostrarCurso(${curso})">⬅ Volver al curso</button>`;
+            document.getElementById("contenido").innerHTML = html;
+        }
 
-document.getElementById("contenido").innerHTML = html;
-}
-
-function mostrarReceta(curso,pocion){
-
-let receta = datos[curso][pocion];
-
-let html = `<h2>${pocion}</h2>`;
-
-html += "<h3>Ingredientes</h3><ul class='ingredientes'>";
-
-receta.ingredientes.forEach(i=>{
-html += "<li>"+i+"</li>";
-});
-
-html += "</ul>";
-
-html += "<h3>Tratamiento de ingredientes</h3><ul class='ingredientes'>";
-
-receta.tratamiento.forEach(t=>{
-html += "<li>"+t+"</li>";
-});
-
-html += "</ul>";
-
-html += "<h3>Pasos</h3><ol class='pasos'>";
-
-receta.pasos.forEach(p=>{
-html += "<li>"+p+"</li>";
-});
-
-html += "</ol>";
-
-html += `<button onclick="mostrarCurso(${curso})">⬅ Volver al curso</button>`;
-
-document.getElementById("contenido").innerHTML = html;
-}
-
-function volverCursos(){
-document.getElementById("contenido").innerHTML="";
-}
-
-</script>
+        function volverCursos() {
+            document.getElementById("contenido").innerHTML = "";
+        }
+    </script>
 
 </body>
 </html>
