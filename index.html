@@ -30,13 +30,36 @@
             background: white;
             min-height: 100px;
         }
-        .ingredientes, .pasos {
-            text-align: left;
-            padding-left: 20px;
-        }
-        .ingredientes {
-            list-style: none;
-            padding-left: 0;
+        /* Centrar el contenedor principal */
+#contenido {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #aaa;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    text-align: center; /* Esto centra los títulos H2, H3 y botones */
+}
+
+/* Estilo para las listas (ingredientes y pasos) */
+.ingredientes, .pasos {
+    display: inline-block; /* Permite que el bloque se comporte como texto para centrarlo */
+    text-align: left;      /* El texto interno de la lista se alinea a la izquierda */
+    margin: 10px auto;     /* Centra el bloque de la lista en la página */
+    width: fit-content;    /* El ancho se ajusta al texto más largo */
+    min-width: 250px;      /* Evita que se vea muy estrecho en móviles */
+}
+
+.ingredientes {
+    list-style: none;      /* Sin puntos para ingredientes */
+    padding-left: 0;
+}
+
+.pasos {
+    list-style-position: inside; /* Los números quedan alineados con el texto */
+    padding-left: 0;
+}
         }
     </style>
 </head>
@@ -63,13 +86,21 @@ const datos = {
         "Poción oculus": {
             ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
             tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
-            pasos: ["1. Encender el fuego", "2. Añadir la base ", "3. Poner la mezcla a 100°", "4. Añadir ajenjo en trozos", "5. Añadir mandrágora cocida", "6. Remover 3 veces en sentido anti-horario", "7. Añadir el polvo de unicornio", "8. Remover en sentido horario", "9. Añadir la lágrima de moonclaf", "10. Remover 2 veces en sentido anti", "11. Apagar el fuego"]
+            pasos: [" Encender el fuego", " Añadir la base ", " Poner la mezcla a 100°", " Añadir ajenjo en trozos", " Añadir mandrágora cocida", " Remover 3 veces en sentido anti-horario", " Añadir el polvo de unicornio", " Remover en sentido horario", " Añadir la lágrima de moonclaf", " Remover 2 veces en sentido anti", " Apagar el fuego"]
         },
         "Poción calmante": {
             ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
             tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
-            pasos: ["1. Encender el fuego", "2. Añadir la base", "3. Poner la mezcla a 120°", "4. Añadir el polvo de púas", "5. Remover en sentido horario", "6. Añadir lavanda y camomila en trozos", "7. Añadir la solución", "8. Remover derecha", "9. Apagar fuego"]
+            pasos: [" Encender el fuego", " Añadir la base", " Poner la mezcla a 120°", " Añadir el polvo de púas", " Remover en sentido horario", " Añadir lavanda y camomila en trozos", " Añadir la solución", " Remover derecha", " Apagar fuego"]
         }
+        "Poción de hielo": {
+     ingredientes: ["Fruto de arbustos de fuego","Cáscara de huevo de Ashwinder","Polvo verrugoso","Sangre de salamandra","Vainilla de viento"],
+    tratamiento: ["Moler los frutos de arbusto de fuego","Moler el polvo verrugoso"],
+         pasos: ["Encender el fuego","Añadir la base(alcohol)","Poner el fuego a 30°","Añadir el polvo de frutos","Remover en sentido horario","Añadir cáscaras de ashwinder","Remover izquierda","Añadir polvo verrugoso","Añadir sangre de salamandra","Remover en sentido anti-horario","Añadir vainilla de viento","Apagar el fuego"]
+        }
+        "Poción volubilis": {
+        ingredientes: ["Narciso pitantes","Pétalo de rosas","Jarabe de eléboro","Aguamiel","Pasta de menta","Pluma de flopper","Mandrágora cocida"],
+        ingredientes: [" ]
     },
     5:{},
     6:{},
