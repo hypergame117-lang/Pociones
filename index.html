@@ -42,24 +42,23 @@
     text-align: center; /* Esto centra los títulos H2, H3 y botones */
 }
 
-/* Estilo para las listas (ingredientes y pasos) */
-.ingredientes, .pasos {
-    display: inline-block; /* Permite que el bloque se comporte como texto para centrarlo */
-    text-align: left;      /* El texto interno de la lista se alinea a la izquierda */
-    margin: 10px auto;     /* Centra el bloque de la lista en la página */
-    width: fit-content;    /* El ancho se ajusta al texto más largo */
-    min-width: 250px;      /* Evita que se vea muy estrecho en móviles */
-}
+/* Contenedor para que las listas estén centradas pero su texto a la izquierda */
+        .lista-centrada {
+            display: inline-block;
+            text-align: left;
+            margin: 10px auto;
+            min-width: 280px;
+        }
 
-.ingredientes {
-    list-style: none;      /* Sin puntos para ingredientes */
-    padding-left: 0;
-}
+        .ingredientes {
+            list-style: none; /* Sin puntos */
+            padding-left: 0;
+        }
 
-.pasos {
-    list-style-position: inside; /* Los números quedan alineados con el texto */
-    padding-left: 0;
-}
+        .pasos {
+            list-style-position: inside; /* Números pegados al texto */
+            padding-left: 0;
+        }
         
     </style>
 </head>
