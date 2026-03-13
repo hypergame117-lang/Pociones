@@ -2,64 +2,101 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Libro de Pociones</title>
+    <title>Libro de Pociones Mágico</title>
     <style>
+        /* Fondo inspirado en un caldero o castillo */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            background-color: #eef3ff;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button:hover {
-            background-color: #ddd;
-        }
-        #contenido {
-            margin-top: 20px;
+            background-color: #1a1a2e;
+            background-image: radial-gradient(circle, #2e2e4e 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            margin: 0;
             padding: 20px;
-            border: 1px solid #aaa;
-            width: 60%;
+        }
+
+        h1 {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px #000;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        /* Botones estilo medieval/mágico */
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            background: #333;
+            color: #ffd700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        button:hover {
+            background: #ffd700;
+            color: #1a1a2e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Contenedor tipo pergamino */
+        #contenido {
+            margin-top: 30px;
+            padding: 40px;
+            border: 15px solid #3d2b1f; /* Marco de madera */
+            width: 70%;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            background: white;
-            min-height: 100px;
+            background-color: #f4e4bc; /* Color pergamino */
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            color: #2d1e12;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border-radius: 5px;
+            min-height: 200px;
         }
-        /* Centrar el contenedor principal */
-#contenido {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #aaa;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    background: white;
-    text-align: center; /* Esto centra los títulos H2, H3 y botones */
-}
 
-/* Contenedor para que las listas estén centradas pero su texto a la izquierda */
-        .lista-centrada {
+        h2, h3 {
+            font-family: 'Georgia', serif;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 5px;
+        }
+
+        /* Estilo para que las listas se vean centradas pero alineadas */
+        .seccion-receta {
             display: inline-block;
             text-align: left;
-            margin: 10px auto;
-            min-width: 280px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
         }
 
-        .ingredientes {
-            list-style: none; /* Sin puntos */
-            padding-left: 0;
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+            line-height: 1.6;
         }
 
-        .pasos {
-            list-style-position: inside; /* Números pegados al texto */
-            padding-left: 0;
+        .ingredientes li {
+            list-style-type: "✦ ";
+            margin-bottom: 5px;
         }
-        
+
+        .volver-btn {
+            background: #8b0000;
+            color: white;
+            border-color: #5a0000;
+        }
+
+        .volver-btn:hover {
+            background: #ff4500;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -67,95 +104,81 @@
     <h1>🧪 Libro de Pociones</h1>
 
     <div id="cursos">
-        <h2>Selecciona el curso</h2>
-        <button onclick="mostrarCurso(4)">Curso 4</button>
-        <button onclick="mostrarCurso(5)">Curso 5</button>
-        <button onclick="mostrarCurso(6)">Curso 6</button>
-        <button onclick="mostrarCurso(7)">Curso 7</button>
+        <button onclick="mostrarCurso(4)">IV Año</button>
+        <button onclick="mostrarCurso(5)">V Año</button>
+        <button onclick="mostrarCurso(6)">VI Año</button>
+        <button onclick="mostrarCurso(7)">VII Año</button>
     </div>
 
     <div id="contenido">
-
+        <p><i>Selecciona un curso para abrir el libro...</i></p>
     </div>
 
     <script>
-     // Objeto de datos corregido con todas sus llaves en su sitio
-const datos = {
-    4: {
-        "Poción oculus": {
-            ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
-            tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
-            pasos: [" Encender el fuego", " Añadir la base ", " Poner la mezcla a 100°", " Añadir ajenjo en trozos", " Añadir mandrágora cocida", " Remover 3 veces en sentido anti-horario", " Añadir el polvo de unicornio", " Remover en sentido horario", " Añadir la lágrima de moonclaf", " Remover 2 veces en sentido anti", " Apagar el fuego"]
+    const datos = {
+        4: {
+            "Poción Oculus": {
+                ingredientes: ["Ajenjo", "Mandrágora", "Cuerno de Unicornio", "Lágrima de moonclaf"],
+                tratamiento: ["Cortar el ajenjo", "Cocinar la mandrágora", "Moler el cuerno de unicornio"],
+                pasos: ["Encender el fuego", "Añadir la base", "Mezcla a 100°C", "Añadir ajenjo", "Añadir mandrágora", "Remover 3 veces anti-horario", "Añadir polvo de unicornio", "Remover horario", "Añadir lágrima", "Remover 2 veces anti-horario", "Apagar fuego"]
+            },
+            "Poción Calmante": {
+                ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
+                tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
+                pasos: ["Fuego encendido", "Base lista", "Mezcla a 120°C", "Polvo de púas", "Remover horario", "Añadir hierbas", "Añadir solución", "Remover derecha", "Apagar fuego"]
+            },
+            "Poción de Hielo": {
+                ingredientes: ["Fruto de arbustos de fuego", "Huevo de Ashwinder", "Polvo verrugoso", "Sangre de salamandra"],
+                tratamiento: ["Moler frutos", "Moler polvo verrugoso"],
+                pasos: ["Fuego a 30°C", "Añadir base", "Añadir frutos", "Remover horario", "Cáscara de huevo", "Remover izquierda", "Polvo verrugoso", "Sangre de salamandra", "Remover anti-horario", "Apagar"]
+            },
+            "Poción Volubilis": {
+                ingredientes: ["Narcisos pitantes", "Pétalo de rosas", "Jarabe de eléboro", "Aguamiel", "Rama de menta", "Pluma de flopper", "Mandrágora"],
+                tratamiento: ["Cortar narcisos", "Cortar rosa", "Moler menta"],
+                pasos: ["Fuego a 45°C", "Base de alcohol", "Añadir narciso y rosa", "Remover 2 veces horario", "Eléboro y aguamiel", "Remover 3 veces derecha", "Pasta de menta", "Remover 2 veces izquierda", "Pluma de flooper", "Mandrágora cocida"]
+            }
         },
-        "Poción calmante": {
-            ingredientes: ["Púas de knarl", "Lavanda", "Camomila", "Solución para el dolor de cabeza"],
-            tratamiento: ["Moler las púas", "Cortar la lavanda", "Cortar camomila"],
-            pasos: [" Encender el fuego", " Añadir la base", " Poner la mezcla a 120°", " Añadir el polvo de púas", " Remover en sentido horario", " Añadir lavanda y camomila en trozos", " Añadir la solución", " Remover derecha", " Apagar fuego"]
-        },
-        "Poción de hielo": {
-     ingredientes: ["Fruto de arbustos de fuego","Cáscara de huevo de Ashwinder","Polvo verrugoso","Sangre de salamandra","Vainilla de viento"],
-    tratamiento: ["Moler los frutos de arbusto de fuego","Moler el polvo verrugoso"],
-         pasos: ["Encender el fuego","Añadir la base(alcohol)","Poner el fuego a 30°","Añadir el polvo de frutos","Remover en sentido horario","Añadir cáscaras de ashwinder","Remover izquierda","Añadir polvo verrugoso","Añadir sangre de salamandra","Remover en sentido anti-horario","Añadir vainilla de viento","Apagar el fuego"]
-        },
-        "Poción volubilis": {
-        ingredientes: ["Narcisos pitantes","Pétalo de rosas","Jarabe de eléboro","Aguamiel","Rama de menta","Pluma de flopper","Mandrágora cocida"],
-        tratamineto: ["Cortar narcisos","Cortar rosa","Cortar menta","Moler los trozos de menta"],
-        pasos: ["Encender fuego","Añadir la base(alcohol)","Poner el fuego a 45°","Añadir el narciso en trozos","Añadir la rosa en trozos","Remover 2 veces en sentido horario","Añadir eléboro y aguamiel","Remover 3 veces derecha","Añadir la pasta de mente","Remover 2 veces izqueirda","Añadir pluma de flooper","Añadir mandrágora cocida"]
-           } 
-    },
-    5:{},
-    6:{},
-    7:{}
-};
+        5: {}, 6: {}, 7: {}
+    };
 
-function mostrarCurso(curso) {
-    let html = "<h2>Pociones del Curso " + curso + "</h2>";
-    
-    // Obtenemos las pociones del curso seleccionado
-    let listaPociones = datos[curso];
+    function mostrarCurso(curso) {
+        let html = `<h2>📜 Pociones de ${curso}º Año</h2>`;
+        let lista = datos[curso];
 
-    if (Object.keys(listaPociones).length === 0) {
-        html += "<p>No hay recetas en este curso todavía.</p>";
-    } else {
-        for (let nombrePocion in listaPociones) {
-            html += `<button onclick="mostrarReceta(${curso}, '${nombrePocion}')">${nombrePocion}</button><br>`;
+        if (Object.keys(lista).length === 0) {
+            html += "<p>Este capítulo está en blanco. Aún no has aprendido estas pociones.</p>";
+        } else {
+            for (let nombre in lista) {
+                html += `<button onclick="mostrarReceta(${curso}, '${nombre}')">${nombre}</button><br>`;
+            }
         }
+        html += `<br><button class="volver-btn" onclick="volverCursos()">Cerrar Libro</button>`;
+        document.getElementById("contenido").innerHTML = html;
     }
 
-    html += `<br><button onclick="volverCursos()">⬅ Volver</button>`;
-    document.getElementById("contenido").innerHTML = html;
-}
+    function mostrarReceta(curso, nombre) {
+        let receta = datos[curso][nombre];
+        let html = `<h2>${nombre}</h2>`;
 
-function mostrarReceta(curso, nombrePocion) {
-    let receta = datos[curso][nombrePocion];
-    let html = `<h2>${nombrePocion}</h2>`;
+        html += `<div class="seccion-receta"><h3>🌿 Ingredientes</h3><ul>`;
+        receta.ingredientes.forEach(i => html += `<li>${i}</li>`);
+        html += `</ul></div>`;
 
-    html += "<h3>Ingredientes</h3><ul class='ingredientes'>";
-    receta.ingredientes.forEach(i => {
-        html += "<li>" + i + "</li>";
-    });
-    html += "</ul>"; // <-- Aquí estaba el error (línea 108 aprox)
+        html += `<div class="seccion-receta"><h3>🔪 Tratamiento</h3><ul>`;
+        receta.tratamiento.forEach(t => html += `<li>${t}</li>`);
+        html += `</ul></div>`;
 
-    html += "<h3>Tratamiento</h3><ul class='ingredientes'>";
-    receta.tratamiento.forEach(t => {
-        html += "<li>" + t + "</li>";
-    });
-    html += "</ul>";
+        html += `<div class="seccion-receta"><h3>🔥 Modo de preparación</h3><ol>`;
+        receta.pasos.forEach(p => html += `<li>${p}</li>`);
+        html += `</ol></div>`;
 
-    html += "<h3>Pasos</h3><ol class='pasos'>";
-    receta.pasos.forEach(p => {
-        html += "<li>" + p + "</li>";
-    });
-    html += "</ol>";
+        html += `<br><button class="volver-btn" onclick="mostrarCurso(${curso})">⬅ Volver al Índice</button>`;
+        document.getElementById("contenido").innerHTML = html;
+    }
 
-    html += `<button onclick="mostrarCurso(${curso})">⬅ Volver al curso</button>`;
-    document.getElementById("contenido").innerHTML = html;
-}
-
-function volverCursos() {
-    document.getElementById("contenido").innerHTML = "";
-}
+    function volverCursos() {
+        document.getElementById("contenido").innerHTML = "<p><i>Selecciona un curso para abrir el libro...</i></p>";
+    }
     </script>
-
 </body>
 </html>
